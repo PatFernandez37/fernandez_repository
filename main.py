@@ -12,7 +12,7 @@ class BattleshipGame:
             player = "User"
         print("This is how the " + player + "'s board look: \n")
         # print the horiz numbers
-        print("  ", end=' ')
+        print(" ", end=' ')
         for i in range(10):
             print("  " + str(i + 1) + "  ", end=' ')
         print("\n")
@@ -34,11 +34,11 @@ class BattleshipGame:
                     else:
                         print(" ", end=' ')
                 if j != 9:
-                    print(" || ", end=' ')
+                    print(" | ", end=' ')
             print()
             # print a horizontal line at end of rows
             if i != 9:
-                print("   __________________________________________________________")
+                print("   ----------------------------------------------------------")
             else:
                 print()
 
@@ -53,7 +53,7 @@ class BattleshipGame:
             valid = False
             while (not valid):
                 self.print_board("u", board)
-                print("Putting an/a " + ship + " in place")
+                print("Putting an " + ship + " in Place")
                 x, y = self.get_coor()
                 ori = self.v_or_h()
                 valid = self.validate(board, ships[ship], x, y, ori)
@@ -63,7 +63,7 @@ class BattleshipGame:
             # place the ship
             board = self.place_ship(board, ships[ship], ship[0], ori, x, y)
             self.print_board("u", board)
-        input("Our ships are ready, please ENTER to go to war!")
+        input("User ships have been placed. To proceed, press enter.")
         return board
 
     # let the computer place/validate ships
@@ -165,11 +165,11 @@ class BattleshipGame:
         make the move on the board and return the board, modified
         """
         if board[x][y] == -1:
-            return "Oh you miss? Unlucky"
+            return "miss"
         elif board[x][y] == '*' or board[x][y] == '$':
-            return "You already hit this one, go shoot somewhere else"
+            return "try again"
         else:
-            return "Bang!"
+            return "hit"
 
     def user_move(self, board):
         """
@@ -279,7 +279,7 @@ class BattleshipGame:
                 quit()
             # display current computer board
             self.print_board("c", comp_board)
-            input("Press ENTER to continue")
+            input("To finish user turn, press ENTER.")
             # computer move
             user_board = self.computer_move(user_board)
             # check if computer move
@@ -287,7 +287,7 @@ class BattleshipGame:
                 print("THE COMPUTER WON! :(")
                 quit()
             # display user board
-            input("Press ENTER to continue")
+            input("To finish computer turn, press ENTER")
 
 
 root = BattleshipGame()
